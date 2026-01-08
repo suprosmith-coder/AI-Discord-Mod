@@ -1,7 +1,52 @@
-discord
-python-dotenv
-asyncio
-pillow
-openai
-torch
-transformers
+# ========================================
+# 🎯 CYANIX AI - REQUIREMENTS
+# ========================================
+# Python 3.8+ required
+
+# 🏗️ Core Dependencies
+discord.py>=2.3.0
+python-dotenv>=1.0.0
+aiohttp>=3.8.0
+
+# 🤖 AI & Machine Learning
+openai>=0.28.0
+transformers>=4.35.0
+torch>=2.0.0
+torchvision>=0.15.0
+Pillow>=10.0.0
+scikit-learn>=1.3.0
+
+# 📊 Data & Utilities
+numpy>=1.24.0
+pandas>=2.0.0
+requests>=2.31.0
+python-dateutil>=2.8.0
+colorama>=0.4.0
+
+# 🗄️ Database (Optional)
+sqlite3  # Built-in
+# psycopg2-binary>=2.9.0  # For PostgreSQL
+# pymongo>=4.5.0  # For MongoDB
+
+# 📈 Monitoring & Logging
+structlog>=23.1.0
+prometheus-client>=0.17.0
+
+# 🔧 Development Tools
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# 🐳 Docker Support
+# python-on-whales>=0.65.0  # Optional for Docker integration
+
+# 🚀 Performance
+uvloop>=0.17.0  # Faster async (Linux only)
+orjson>=3.9.0  # Faster JSON parsing
+
+# ========================================
+# 💡 Installation Notes:
+# For GPU support with PyTorch, visit: https://pytorch.org/get-started/locally/
+# ========================================
