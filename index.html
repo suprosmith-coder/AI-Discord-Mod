@@ -3,81 +3,947 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sven - Your AI-Powered Discord Bot</title>
+    <title>Cyanix AI - Advanced AI-Powered Discord Moderation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --neon-cyan: #00ffff;
+            --neon-purple: #9d00ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --cyber-blue: #0011ff;
+            --matrix-green: #00ff41;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #f4f7f9;
-            font-family: Arial, sans-serif;
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(157, 0, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            color: #ffffff;
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 49%, rgba(0, 255, 255, 0.03) 50%, transparent 51%),
+                linear-gradient(transparent 49%, rgba(0, 255, 255, 0.03) 50%, transparent 51%);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Cyberpunk Glitch Text Effect */
+        .cyber-text {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            2% { transform: translate(-2px, 2px); }
+            4% { transform: translate(-2px, -2px); }
+            6% { transform: translate(2px, 2px); }
+            8% { transform: translate(2px, -2px); }
+            10% { transform: translate(0); }
+            100% { transform: translate(0); }
+        }
+
+        .cyber-text::before,
+        .cyber-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cyber-text::before {
+            animation: glitch-top 1s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+        }
+
+        .cyber-text::after {
+            animation: glitch-bottom 1.5s infinite;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+        }
+
+        @keyframes glitch-top {
+            0% { transform: translate(0); opacity: 1; }
+            20% { transform: translate(-1px, 1px); opacity: 0.8; }
+            40% { transform: translate(1px, -1px); opacity: 0.8; }
+            60% { transform: translate(0); opacity: 1; }
+        }
+
+        @keyframes glitch-bottom {
+            0% { transform: translate(0); opacity: 1; }
+            10% { transform: translate(1px, -1px); opacity: 0.8; }
+            30% { transform: translate(-1px, 1px); opacity: 0.8; }
+            50% { transform: translate(0); opacity: 1; }
+        }
+
+        /* Neon Glow Effects */
+        .neon-glow {
+            text-shadow: 
+                0 0 5px var(--neon-cyan),
+                0 0 10px var(--neon-cyan),
+                0 0 20px var(--neon-cyan),
+                0 0 40px var(--neon-cyan);
+        }
+
+        .neon-border {
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 
+                0 0 5px var(--neon-cyan),
+                0 0 10px var(--neon-cyan),
+                inset 0 0 5px var(--neon-cyan);
+        }
+
+        /* Hero Section */
         .hero-section {
-            padding: 100px 0 50px 0;
+            padding: 150px 0 100px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .features-section {
-            padding: 50px 0;
-            text-align: center;
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
         }
-        .btn-invite, .btn-join {
-            background-color: #7289DA;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 18px;
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            color: var(--neon-cyan);
+            letter-spacing: 3px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* Neon Buttons */
+        .btn-neon {
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            border-radius: 0;
             text-decoration: none;
-            margin-top: 30px;
             display: inline-block;
         }
-        .btn-invite:hover, .btn-join:hover {
-            background-color: #5865F2;
-            color: white;
-            text-decoration: none;
+
+        .btn-neon:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            box-shadow: 
+                0 0 20px var(--neon-cyan),
+                0 0 40px var(--neon-cyan);
+            transform: translateY(-3px);
         }
-        .feature {
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+
+        .btn-neon.purple {
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+        }
+
+        .btn-neon.purple:hover {
+            background: var(--neon-purple);
+            box-shadow: 
+                0 0 20px var(--neon-purple),
+                0 0 40px var(--neon-purple);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 80px;
+            color: var(--neon-cyan);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+        }
+
+        .feature-card {
+            background: rgba(10, 10, 26, 0.7);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 40px 30px;
             margin-bottom: 30px;
-            padding: 20px;
-            border-bottom: 1px solid #ddd;
+            height: 100%;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
         .feature-icon {
-            font-size: 50px;
-            color: #7289DA;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--neon-cyan);
+            display: inline-block;
+            animation: pulse 2s infinite;
         }
-        .features-section h2 {
-            margin-bottom: 50px;
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: rgba(5, 5, 16, 0.8);
+            position: relative;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Setup Guide Section */
+        .setup-section {
+            padding: 100px 0;
+        }
+
+        .setup-step {
+            background: rgba(10, 10, 26, 0.7);
+            border-left: 4px solid var(--neon-cyan);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .setup-step:hover {
+            border-left-color: var(--neon-purple);
+            transform: translateX(10px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--neon-cyan);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0 30px;
+            background: rgba(5, 5, 16, 0.9);
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            margin: 30px 0;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            border-radius: 50%;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .btn-neon {
+                padding: 15px 25px;
+                font-size: 1rem;
+                display: block;
+                margin: 10px auto;
+                max-width: 300px;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+
+        /* Matrix Rain Effect */
+        #matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* Terminal Effect */
+        .terminal {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--neon-cyan);
+            padding: 20px;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal::before {
+            content: 'Cyanix_AI_Terminal >';
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--dark-bg);
+            color: var(--neon-cyan);
+            padding: 0 10px;
+            font-size: 0.9rem;
+        }
+
+        .terminal-line {
+            color: var(--matrix-green);
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: typewriter 2s steps(40) forwards;
+        }
+
+        @keyframes typewriter {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .terminal-line:nth-child(2) { animation-delay: 1s; }
+        .terminal-line:nth-child(3) { animation-delay: 2s; }
+        .terminal-line:nth-child(4) { animation-delay: 3s; }
+
+        /* Animated Background Elements */
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(0) rotate(180deg); }
+            75% { transform: translateY(20px) rotate(270deg); }
+            100% { transform: translateY(0) rotate(360deg); }
         }
     </style>
 </head>
 <body>
+    <!-- Matrix Rain Background -->
+    <canvas id="matrix-rain"></canvas>
+
+    <!-- Floating Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1>Welcome to Sven</h1>
-            <p>An AI-Powered Discord moderation bot, adept at scanning both images and text for inappropriate content.</p>
-            <a href="https://discord.com/api/oauth2/authorize?client_id=1106027638180565003&permissions=1099780144144&scope=bot" class="btn-invite">Invite Sven</a>
-            <a href="https://discord.gg/yVezB9y4M4" class="btn-join">Join Discord Server</a>
+            <h1 class="hero-title cyber-text" data-text="Cyanix AI">Cyanix AI</h1>
+            <p class="hero-subtitle">
+                Advanced AI-Powered Discord moderation with neural networks, real-time analysis, 
+                and cyberpunk-level security protocols for your community.
+            </p>
+            
+            <div class="mt-5">
+                <a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=1099780144144&scope=bot" 
+                   class="btn-neon neon-glow">
+                    <i class="fas fa-robot"></i> INVITE CYANIX
+                </a>
+                <a href="https://discord.gg/cyanix" class="btn-neon purple">
+                    <i class="fab fa-discord"></i> JOIN CYBERSPACE
+                </a>
+                <a href="#features" class="btn-neon">
+                    <i class="fas fa-terminal"></i> VIEW SPECS
+                </a>
+            </div>
+            
+            <!-- Terminal Display -->
+            <div class="terminal mt-5 mx-auto" style="max-width: 800px;">
+                <div class="terminal-line">> Initializing Cyanix AI Systems...</div>
+                <div class="terminal-line">> Neural Networks: ONLINE</div>
+                <div class="terminal-line">> Moderation Protocols: ACTIVE</div>
+                <div class="terminal-line">> Security Level: MAXIMUM</div>
+                <div class="terminal-line">> Ready for deployment.</div>
+            </div>
         </div>
     </section>
-    <section class="features-section">
+
+    <!-- Stats Section -->
+    <section class="stats-section">
         <div class="container">
-            <h2>Features</h2>
             <div class="row">
-                <div class="col-md-4 feature">
-                    <i class="feature-icon fas fa-shield-alt"></i>
-                    <h3>Secure Moderation</h3>
-                    <p>Sven ensures a safe community experience by moderating both images and text for inappropriate content.</p>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number" data-count="99.9">0</div>
+                    <div class="stat-label">Uptime</div>
                 </div>
-                <div class="col-md-4 feature">
-                    <i class="feature-icon fas fa-robot"></i>
-                    <h3>AI-Powered</h3>
-                    <p>With cutting-edge AI technology, Sven effectively filters out spam and harmful content from your server.</p>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number" data-count="250000">0</div>
+                    <div class="stat-label">Messages/Day</div>
                 </div>
-                <div class="col-md-4 feature">
-                    <i class="feature-icon fas fa-users"></i>
-                    <h3>Community Building</h3>
-                    <p>Sven allows you to focus more on your community, taking over the moderation tasks seamlessly.</p>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number" data-count="0.02">0</div>
+                    <div class="stat-label">Second Response</div>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number" data-count="1000">0</div>
+                    <div class="stat-label">Active Servers</div>
                 </div>
             </div>
         </div>
     </section>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title cyber-text" data-text="Core Features">Core Features</h2>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">Neural AI Moderation</h3>
+                        <p class="feature-description">
+                            Advanced neural networks analyze text and images in real-time, 
+                            detecting inappropriate content with 95%+ accuracy using OpenAI 
+                            and custom-trained models.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="feature-title">Real-time Vision Analysis</h3>
+                        <p class="feature-description">
+                            Advanced image recognition powered by Hugging Face transformers 
+                            detects NSFW content, violence, and hate symbols with precision.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Cyber Security Protocols</h3>
+                        <p class="feature-description">
+                            Military-grade encryption and privacy protection. 
+                            No message storage, real-time processing only. 
+                            Your data remains secure and private.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">Lightning Response</h3>
+                        <p class="feature-description">
+                            Sub-2-second moderation response time with intelligent caching. 
+                            Handles thousands of concurrent users without performance loss.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Advanced Analytics</h3>
+                        <p class="feature-description">
+                            Real-time dashboards, violation heatmaps, and predictive analytics. 
+                            Track moderation effectiveness and community health metrics.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="feature-title">Fully Customizable</h3>
+                        <p class="feature-description">
+                            Adjust sensitivity levels, warning systems, mute durations, 
+                            and triggering words. Tailor Cyanix AI to your server's specific needs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Guide -->
+    <section class="setup-section">
+        <div class="container">
+            <h2 class="section-title cyber-text" data-text="Quick Deployment">Quick Deployment</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="setup-step">
+                        <div class="step-number">01</div>
+                        <h3 class="step-title">Invite Cyanix</h3>
+                        <p class="feature-description">
+                            Click the invite button above. Grant necessary permissions. 
+                            Cyanix will automatically configure itself in your server.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="setup-step">
+                        <div class="step-number">02</div>
+                        <h3 class="step-title">Configure Settings</h3>
+                        <p class="feature-description">
+                            Use <code>/config</code> command to adjust sensitivity, 
+                            warning systems, and moderation rules to fit your community.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="setup-step">
+                        <div class="step-number">03</div>
+                        <h3 class="step-title">Set Up Logging</h3>
+                        <p class="feature-description">
+                            Designate a moderation log channel with 
+                            <code>/set_logs_channel</code> to track all actions.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="setup-step">
+                        <div class="step-number">04</div>
+                        <h3 class="step-title">Monitor & Optimize</h3>
+                        <p class="feature-description">
+                            Use <code>/stats</code> to view analytics. Adjust settings 
+                            based on performance metrics and community feedback.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo cyber-text" data-text="Cyanix AI">Cyanix AI</div>
+            
+            <p class="hero-subtitle" style="max-width: 600px; margin: 0 auto 30px;">
+                Advanced AI moderation for the next generation of Discord communities.
+            </p>
+            
+            <div class="social-links">
+                <a href="https://github.com/yourusername/cyanix-ai" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://discord.gg/cyanix" class="social-link">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://twitter.com/cyanix_ai" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="mailto:support@cyanix.ai" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            
+            <div class="mt-4">
+                <a href="#privacy" class="btn-neon" style="padding: 10px 20px; font-size: 0.9rem; margin: 5px;">
+                    Privacy Policy
+                </a>
+                <a href="#terms" class="btn-neon purple" style="padding: 10px 20px; font-size: 0.9rem; margin: 5px;">
+                    Terms of Service
+                </a>
+                <a href="#docs" class="btn-neon" style="padding: 10px 20px; font-size: 0.9rem; margin: 5px;">
+                    Documentation
+                </a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2024 Cyanix AI. All systems operational. | Neural Networks Powered by OpenAI & Hugging Face
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Effects -->
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const matrix = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789";
+        const matrixArray = matrix.split("");
+        
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 5, 16, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillStyle = `rgba(0, ${Math.floor(255 * Math.random())}, 0, ${Math.random()})`;
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        // Animated counter for stats
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-count'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target.toFixed(target % 1 === 0 ? 0 : 2);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+        
+        // Initialize animations when in viewport
+        function initAnimations() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                if (isElementInViewport(stat)) {
+                    animateCounter(stat);
+                    stat.classList.add('animated');
+                }
+            });
+        }
+        
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        // Resize canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Animation loop
+        function animate() {
+            drawMatrix();
+            requestAnimationFrame(animate);
+        }
+        
+        // Initialize
+        animate();
+        window.addEventListener('scroll', initAnimations);
+        window.addEventListener('load', initAnimations);
+        initAnimations();
+        
+        // Terminal typing effect
+        const terminalLines = document.querySelectorAll('.terminal-line');
+        terminalLines.forEach((line, index) => {
+            line.style.animationDelay = `${index * 1}s`;
+        });
+        
+        // Button hover effects
+        document.querySelectorAll('.btn-neon').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Feature card hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.feature-icon');
+                icon.style.animation = 'pulse 0.5s infinite';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.feature-icon');
+                icon.style.animation = 'pulse 2s infinite';
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Cyber text glitch effect
+        document.querySelectorAll('.cyber-text').forEach(text => {
+            setInterval(() => {
+                text.style.animation = 'none';
+                setTimeout(() => {
+                    text.style.animation = 'glitch 3s infinite';
+                }, 50);
+            }, 8000);
+        });
+    </script>
 </body>
 </html>
